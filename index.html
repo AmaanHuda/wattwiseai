@@ -7,12 +7,12 @@
       name="description"
       content="WattWise AI is an AI-powered food subscription that will make you eat healthy again, 365 days per year. It's tailored to your personal tastes and nutritional needs."
     />
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
     <!-- Always include this line of code!!! -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="icon" href="img/favicon.png" />
-    <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/queries.css" />
+    <link rel="stylesheet" href="css/form.css" />
 
     <script
       type="module"
@@ -32,7 +33,10 @@
       nomodule=""
       src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
     ></script>
-
+    <script
+      src="https://kit.fontawesome.com/c62b6f9992.js"
+      crossorigin="anonymous"
+    ></script>
     <script
       defer
       src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"
@@ -72,10 +76,13 @@
               energy consumption accurately, helping users optimize power usage,
               reduce wastage, and save costs.
             </p>
-            <a href="#cta" class="btn btn--full margin-right-sm">Save now!</a>
+            <a href="#" class="btn btn--full margin-right-sm" id="dataInputOpen"
+              >Save now!</a
+            >
 
             <a href="#how" class="btn btn--outline">Learn more &darr;</a>
           </div>
+
           <div class="hero-img-box">
             <picture>
               <source srcset="img/img2.jpg" type="image/webp" />
@@ -86,7 +93,116 @@
           </div>
         </div>
       </section>
+      <section class="formSection">
+        <div class="offModal">
+          <div class="main-container modal-container">
+            <div class="form-wrapper">
+              <button class="closeButtonForm">
+                <i class="fa-solid fa-x"></i>
+              </button>
 
+              <form method="POST" enctype="multipart/form-data">
+                <!-- Title and Description -->
+                <div class="form-header">
+                  <h2 class="form-title">Electricity Data</h2>
+                  <p class="form-description">
+                    Please fill out your electric data to proceed further with
+                    the estimation of your desired place.All required points are
+                    marked with *.
+                  </p>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="form-group">
+                  <label for="fullname" class="form-label"
+                    >Power Consumed<strong>* In watts(per day)</strong></label
+                  >
+                  <input type="number" class="form-input powerInput" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Number of hours consumed*</label>
+                  <input type="number" class="form-input hoursInput" required />
+                </div>
+                <div class="form-group">
+                  <label for="fullname" class="form-label"
+                    >Number of Occupants(optional)</label
+                  >
+                  <input type="number" class="form-input powerInput" />
+                </div>
+
+                <div class="form-group">
+                  <label for="employee-id" class="form-label"
+                    >Meter Number(Optional)</label
+                  >
+                  <input
+                    type="text"
+                    name="employee-id"
+                    id="employee-id"
+                    class="form-input"
+                  />
+                </div>
+
+                <!-- Expense Details -->
+                <div class="form-group">
+                  <label for="expense-type" class="form-label"
+                    >Place of Estimation(optional)</label
+                  >
+                  <select
+                    name="expense-type"
+                    id="expense-type"
+                    class="form-select"
+                    required
+                  >
+                    <option value="house">House</option>
+                    <option value="office">Office</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="merchant-name" class="form-label"
+                    >Vendor Name (Optional)</label
+                  >
+                  <select
+                    name="expense-type"
+                    id="expense-type"
+                    class="form-select"
+                  >
+                    <option value="travel">
+                      Adani Electricity Mumbai Limited (AEML)
+                    </option>
+                    <option value="meals">Tata Power</option>
+                    <option value="office-supplies">BEST Supply</option>
+                    <option value="office-supplies">
+                      MSEDCL (Maharashtra State Electricity Distribution Company
+                      Limited)
+                    </option>
+                  </select>
+                </div>
+
+                <!-- Declaration / Consent -->
+                <div class="consent-group">
+                  <input
+                    type="checkbox"
+                    id="declaration"
+                    class="form-checkbox"
+                    required
+                  />
+                  <label for="declaration" class="consent-label">
+                    I confirm that the above information can be used for
+                    processing.
+                  </label>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn estimateButton">
+                  Estimate Now
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
       <section class="section-meals" id="meals">
         <div class="container center-text">
           <span class="subheading">Why this topic is improtant</span>
@@ -218,11 +334,21 @@
               actionable energy-saving recommendations.
             </p>
           </div>
+
+          <div class="step-text-box">
+            <p class="step-number">04</p>
+            <h3 class="heading-tertiary">System Overload & Equipment Wear</h3>
+            <p class="step-description">
+              Unoptimized electricity use puts unnecessary stress on appliances
+              and wiring, leading to frequent breakdowns, reduced lifespan, and
+              higher maintenance or replacement costs over time.
+            </p>
+          </div>
         </div>
       </section>
 
       <section class="section-cta" id="cta">
-        <div class="container" style="align-items: center; text-align: center">
+        <div class="container">
           <div class="cta">
             <div class="cta-text-box">
               <h2 class="heading-secondary">Subcribe to our Newsletter</h2>
@@ -284,7 +410,7 @@
           font-family: Arial, sans-serif;
         "
       >
-        &copy; 2026 WattWise AI. All rights reserved.
+        &copy; 2026 WattWise AI. All rights reserved.j
       </footer>
     </main>
   </body>

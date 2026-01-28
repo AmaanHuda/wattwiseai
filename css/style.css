@@ -19,6 +19,9 @@
   font-size: 2.2rem;
   font-weight: 700;
 }
+.blur {
+  filter: blur(100px);
+}
 
 /**************************/
 /* NAVIGATION */

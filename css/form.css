@@ -1,0 +1,181 @@
+/* General Body and Font Styles */
+body {
+  font-family: "Inter", sans-serif;
+  background-color: #f3f4f6;
+  margin: 0;
+}
+.modal-container {
+  width: 85%;
+  height: auto;
+  margin: auto;
+  position: fixed;
+  /* top: 20%;
+    left: 8%; */
+  z-index: 2;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+}
+/* Main container for centering the form */
+.main-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Form wrapper/card */
+.form-wrapper {
+  width: 100%;
+  max-width: 42rem; /* max-w-2xl */
+  border-radius: 0.5rem; /* rounded-lg */
+  background-color: white;
+  padding: 2.5rem; /* p-10 */
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.closeButtonForm {
+  padding: 7px 14px;
+  background: #cf711f;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+}
+
+/* Top image styling */
+
+/* Header section for title and description */
+.form-header {
+  margin-bottom: 2rem; /* mb-8 */
+  text-align: center;
+}
+.offModal {
+  display: none;
+  transition: display 1s ease-in-out;
+}
+
+.onModal {
+  display: block;
+  transition: display 1s ease-in-out;
+}
+.form-title {
+  font-size: 1.875rem; /* text-2xl */
+  font-weight: 600; /* font-semibold */
+  color: #9c8872; /* text-gray-800 */
+}
+
+.form-description {
+  margin-top: 0.5rem; /* mt-2 */
+  font-size: 0.875rem; /* text-sm */
+  color: #cf711f; /* text-gray-600 */
+  line-height: 1.5;
+}
+
+/* Container for each form field group */
+.form-group {
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+/* Form labels */
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem; /* mb-2 */
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: #4b5563; /* text-gray-600 */
+}
+
+/* Common styles for input, select, and textarea */
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  border-radius: 0.375rem; /* rounded-md */
+  border: 1px solid #d1d5db; /* border-gray-300 */
+  padding: 0.75rem; /* p-3 */
+  font-size: 0.875rem; /* text-sm */
+  color: #1f2937; /* text-gray-800 */
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  border-color: #cf711f; /* focus:border-indigo-500 */
+  box-shadow: 0 0 0 1px #cf711f; /* focus:ring-1 focus:ring-indigo-500 */
+  outline: none;
+}
+
+/* Consent Checkbox Group */
+.consent-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.form-checkbox {
+  height: 1rem;
+  width: 1rem;
+  color: #4f46e5;
+}
+
+.consent-label {
+  margin-left: 0.5rem;
+  font-size: 0.875rem;
+  color: #4b5563;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  border-radius: 0.375rem;
+  background-color: #cf711f;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #e28431;
+}
+
+.submit-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.5);
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 640px) {
+  .main-container {
+    padding: 1rem;
+  }
+  .form-wrapper {
+    padding: 1.5rem;
+  }
+  .form-title {
+    font-size: 1.5rem;
+  }
+}

@@ -1,28 +1,49 @@
-console.log("Hello Amaan!");
-
-const myName = "Jonas Schmedtmann";
+const myName = "Amaan";
 const h1 = document.querySelector(".heading-primary");
-console.log(myName);
+const dataInput = document.getElementById("dataInputOpen");
+const formOpen = document.querySelector(".offModal");
+const formClose = document.querySelector(".closeButtonForm");
+const heroSection = document.querySelector(".section-hero");
+const mealSection = document.querySelector(".section-meals");
+const ctaSection = document.querySelector(".section-cta");
+const howSection = document.querySelector(".section-how");
+const header = document.querySelector(".header");
+const estimateButton = document.querySelector(".estimateButton");
+let powerInput = document.querySelector(".powerInput");
+let hoursInput = document.querySelector(".hoursInput");
+
+console.log(powerInput, hoursInput);
 console.log(h1);
-
-// h1.addEventListener("click", function () {
-//   h1.textContent = myName;
-//   h1.style.backgroundColor = "red";
-//   h1.style.padding = "5rem";
-// });
-
-///////////////////////////////////////////////////////////
-// Set current year
-const yearEl = document.querySelector(".year");
-const currentYear = new Date().getFullYear();
-yearEl.textContent = currentYear;
-
-///////////////////////////////////////////////////////////
-// Make mobile navigation work
+console.log(formOpen);
 
 const btnNavEl = document.querySelector(".btn-mobile-nav");
 const headerEl = document.querySelector(".header");
 
+estimateButton.addEventListener("click", function () {
+  alert(
+    `Your total consumption of electricity was ${powerInput.value * 0.001 * hoursInput.value} kwH in a day and ${powerInput.value * 0.001 * hoursInput.value * 30} kwH in a month and ${powerInput.value * 0.001 * hoursInput.value * 365} kwH in a year `,
+  );
+});
+dataInput.addEventListener("click", function () {
+  formOpen.classList.remove("offModal");
+  formOpen.classList.toggle("onModal");
+  heroSection.classList.add("blur");
+  mealSection.classList.add("blur");
+  ctaSection.classList.add("blur");
+  howSection.classList.add("blur");
+  header.classList.add("blur");
+});
+
+formClose.addEventListener("click", function () {
+  console.log("Hola amigo");
+  formOpen.classList.remove("onModal");
+  formOpen.classList.toggle("offModal");
+  heroSection.classList.remove("blur");
+  mealSection.classList.remove("blur");
+  ctaSection.classList.remove("blur");
+  howSection.classList.remove("blur");
+  header.classList.remove("blur");
+});
 btnNavEl.addEventListener("click", function () {
   headerEl.classList.toggle("nav-open");
 });
