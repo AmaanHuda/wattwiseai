@@ -66,142 +66,111 @@
 
     <main>
       <section class="section-hero">
-        <div class="hero">
-          <div class="hero-text-box">
-            <h1 class="heading-primary">Intelligence Behind Every Watt</h1>
-            <p class="hero-description">
-              The WattWise AI project is designed to estimate electricity
-              consumption using artificial intelligence. By analyzing historical
-              usage data and appliance-specific patterns, the system can predict
-              energy consumption accurately, helping users optimize power usage,
-              reduce wastage, and save costs.
-            </p>
-            <a href="#" class="btn btn--full margin-right-sm" id="dataInputOpen"
-              >Save now!</a
-            >
+          <div class="hero">
+            <div class="hero-text-box">
+              <h1 class="heading-primary">Intelligence Behind Every Watt</h1>
+              <p class="hero-description">
+                The WattWise AI project is designed to estimate electricity
+                consumption using artificial intelligence. By analyzing historical
+                usage data and appliance-specific patterns, the system can predict
+                energy consumption accurately, helping users optimize power usage,
+                reduce wastage, and save costs.
+              </p>
+              <a href="#" class="btn btn--full margin-right-sm" id="dataInputOpen"
+                >Save now!</a
+              >
 
-            <a href="#how" class="btn btn--outline">Learn more &darr;</a>
-          </div>
+              <a href="#how" class="btn btn--outline">Learn more &darr;</a>
+            </div>
 
-          <div class="hero-img-box">
-            <picture>
-              <source srcset="img/img2.jpg" type="image/webp" />
-              <source srcset="img/img3.jpg" type="image/png" />
+            <div class="hero-img-box">
+              <picture>
+                <source srcset="img/img2.jpg" type="image/webp" />
+                <source srcset="img/img3.jpg" type="image/png" />
 
-              <img src="./img/img1.jpg" class="hero-img" />
-            </picture>
-          </div>
-        </div>
-      </section>
-      <section class="formSection">
-        <div class="offModal">
-          <div class="main-container modal-container">
-            <div class="form-wrapper">
-              <button class="closeButtonForm">
-                <i class="fa-solid fa-x"></i>
-              </button>
-
-              <form method="POST" enctype="multipart/form-data">
-                <!-- Title and Description -->
-                <div class="form-header">
-                  <h2 class="form-title">Electricity Data</h2>
-                  <p class="form-description">
-                    Please fill out your electric data to proceed further with
-                    the estimation of your desired place.All required points are
-                    marked with *.
-                  </p>
-                </div>
-
-                <!-- Personal Information -->
-                <div class="form-group">
-                  <label for="fullname" class="form-label"
-                    >Power Consumed<strong>* In watts(per day)</strong></label
-                  >
-                  <input type="number" class="form-input powerInput" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label">Number of hours consumed*</label>
-                  <input type="number" class="form-input hoursInput" required />
-                </div>
-                <div class="form-group">
-                  <label for="fullname" class="form-label"
-                    >Number of Occupants(optional)</label
-                  >
-                  <input type="number" class="form-input powerInput" />
-                </div>
-
-                <div class="form-group">
-                  <label for="employee-id" class="form-label"
-                    >Meter Number(Optional)</label
-                  >
-                  <input
-                    type="text"
-                    name="employee-id"
-                    id="employee-id"
-                    class="form-input"
-                  />
-                </div>
-
-                <!-- Expense Details -->
-                <div class="form-group">
-                  <label for="expense-type" class="form-label"
-                    >Place of Estimation(optional)</label
-                  >
-                  <select
-                    name="expense-type"
-                    id="expense-type"
-                    class="form-select"
-                    required
-                  >
-                    <option value="house">House</option>
-                    <option value="office">Office</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="merchant-name" class="form-label"
-                    >Vendor Name (Optional)</label
-                  >
-                  <select
-                    name="expense-type"
-                    id="expense-type"
-                    class="form-select"
-                  >
-                    <option value="travel">
-                      Adani Electricity Mumbai Limited (AEML)
-                    </option>
-                    <option value="meals">Tata Power</option>
-                    <option value="office-supplies">BEST Supply</option>
-                    <option value="office-supplies">
-                      MSEDCL (Maharashtra State Electricity Distribution Company
-                      Limited)
-                    </option>
-                  </select>
-                </div>
-
-                <!-- Declaration / Consent -->
-                <div class="consent-group">
-                  <input
-                    type="checkbox"
-                    id="declaration"
-                    class="form-checkbox"
-                    required
-                  />
-                  <label for="declaration" class="consent-label">
-                    I confirm that the above information can be used for
-                    processing.
-                  </label>
-                </div>
-
-                <!-- Submit Button -->
-                <button type="submit" class="submit-btn estimateButton">
-                  Estimate Now
-                </button>
-              </form>
+                <img src="./img/img1.jpg" class="hero-img" />
+              </picture>
             </div>
           </div>
+      </section>
+   
+
+      </section>
+      <section class="formSection">
+        <div class="container">
+   
+
+        <div class="main-content">
+            <!-- Form Section (LHS) -->
+            <div class="form-section">
+                <h2>Energy Estimation Form</h2>
+                <form id="energyForm">
+                    <div class="form-group">
+                        <label for="power">Power In Watts</label>
+                        <input type="number" id="power" class="powerInput" name="power" min="0" step="1"  required placeholder="Enter power in watts">
+                        <p class="info-text">Total wattage of the appliance or system</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="days">Days</label>
+                        <input type="number" class="daysInput" id="days" name="days" min="1" max="365" required placeholder="Number of days">
+                        <p class="info-text">Duration of usage period</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hours">Hours of Consumption</label>
+                        <input type="number" class="hoursInput" id="hours" name="hours" min="0" max="24" step="0.1" required placeholder="Hours per day">
+                        <p class="info-text">Average daily usage in hours</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="place">Place of Estimation</label>
+                        <select id="place" name="place" required>
+                            <option value="">Select location type</option>
+                            <option value="house">House</option>
+                            <option value="office">Office</option>
+                            <option value="hostel">Hostel</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <p class="info-text">Location affects rate calculations</p>
+                    </div>
+
+                    <button type="submit" class="calculate-btn estimationButton">Calculate Estimation</button>
+                </form>
+            </div>
+
+            <!-- Dashboard Section (RHS) -->
+            <div class="dashboard-section">
+                <div class="result-card">
+                    <div class="card-icon icon-orange">⚡</div>
+                    <h3>Estimated Units Consumed</h3>
+                    <div class="result-value placeholder-state" id="units">--</div>
+                    <div class="result-unit">kWh (Kilowatt Hours)</div>
+                </div>
+
+                <div class="result-card">
+                    <div class="card-icon icon-blue">₹</div>
+                    <h3>Estimated Cost of Units</h3>
+                    <div class="result-value placeholder-state" id="cost">--</div>
+                    <div class="result-unit">INR (Indian Rupees)</div>
+                </div>
+
+                <div class="result-card">
+                    <div class="card-icon icon-green">✓</div>
+                    <h3>Accuracy</h3>
+                    <div class="result-value placeholder-state" id="accuracy">--</div>
+                    <div class="result-unit">Confidence Level</div>
+                </div>
+
+                <div class="result-card">
+                    <div class="card-icon icon-purple">📊</div>
+                    <h3>Predicted Expenditure (Next Year)</h3>
+                    <div class="result-value placeholder-state" id="yearlyExpenditure">--</div>
+                    <div class="result-unit">Annual Projection</div>
+                </div>
+            </div>
         </div>
+    </div>
       </section>
       <section class="section-meals" id="meals">
         <div class="container center-text">

@@ -21,6 +21,7 @@
 }
 .blur {
   filter: blur(100px);
+  transition: 0.3s ease-in-out;
 }
 
 /**************************/
