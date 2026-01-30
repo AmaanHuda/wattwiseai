@@ -10,7 +10,7 @@ const btnNavEl = document.querySelector(".btn-mobile-nav");
 const headerEl = document.querySelector(".header");
 
 // Backend API URL
-const API_URL = "http://127.0.0.1:8002";
+const API_URL = "https://wattwiseai-2nov.onrender.com";
 
 document
   .getElementById("energyForm")
