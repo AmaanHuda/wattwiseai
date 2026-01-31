@@ -12,6 +12,177 @@ const headerEl = document.querySelector(".header");
 // Backend API URL
 const API_URL = "https://wattwiseai-2nov.onrender.com";
 
+function pad(n) {
+  return n.toString().padStart(2, "0");
+}
+
+function tick() {
+  const now = new Date();
+  const h = now.getHours(),
+    m = now.getMinutes(),
+    s = now.getSeconds();
+  const ampm = h >= 12 ? "PM" : "AM";
+  const h12 = h % 12 || 12;
+  document.getElementById("clock").textContent =
+    `${h12}:${pad(m)}:${pad(s)} ${ampm}`;
+
+  const days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  document.getElementById("dateStr").textContent =
+    `${days[now.getDay()]}, ${now.getDate()} ${months[now.getMonth()]}`;
+
+  // greeting
+  let g =
+    h < 12
+      ? "Good Morning ☀️"
+      : h < 17
+        ? "Good Afternoon 🌤️"
+        : "Good Evening 🌙";
+  document.getElementById("greeting").textContent = g;
+
+  // header theme
+  const hdr = document.getElementById("header");
+  hdr.classList.remove("night", "afternoon");
+  if (h < 6 || h >= 20) hdr.classList.add("night");
+  else if (h >= 12) hdr.classList.add("afternoon");
+}
+tick();
+setInterval(tick, 1000);
+
+// ─── Location Detector ────────────────────────────
+let detected = false;
+
+function showError(msg) {
+  document.getElementById("errorMsg").textContent = msg;
+  document.getElementById("errorStrip").classList.add("show");
+}
+function hideError() {
+  document.getElementById("errorStrip").classList.remove("show");
+}
+
+function setDetectLoading(on) {
+  const btn = document.getElementById("detectBtn");
+  const icon = document.getElementById("detectIcon");
+  const txt = document.getElementById("detectText");
+  btn.disabled = on;
+
+  if (on) {
+    // spinner icon
+    icon.outerHTML = `<svg id="detectIcon" class="spin" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M23 4v6h-6M1 20v-6h6M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+      </svg>`;
+    txt.textContent = "Detecting…";
+  } else if (detected) {
+    // refresh icon (no spin)
+    document.getElementById("detectIcon").outerHTML =
+      `<svg id="detectIcon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M23 4v6h-6M1 20v-6h6M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/>
+      </svg>`;
+    txt.textContent = "Refresh Location";
+    btn.classList.add("detected");
+  } else {
+    // crosshair icon
+    document.getElementById("detectIcon").outerHTML =
+      `<svg id="detectIcon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+        <line x1="12" y1="1" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="23"/>
+        <line x1="1" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="23" y2="12"/>
+      </svg>`;
+    txt.textContent = "Detect Location";
+    btn.classList.remove("detected");
+  }
+}
+
+async function detectLocation() {
+  hideError();
+  setDetectLoading(true);
+
+  if (!navigator.geolocation) {
+    showError("Geolocation is not supported by your browser.");
+    setDetectLoading(false);
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(
+    async function (pos) {
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+
+      try {
+        // 1) Reverse geocode — OpenStreetMap Nominatim (free)
+        const geoRes = await fetch(
+          `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`,
+        );
+        const geo = await geoRes.json();
+        const city =
+          geo.address?.city ||
+          geo.address?.town ||
+          geo.address?.village ||
+          geo.address?.county ||
+          "Unknown";
+        const state = geo.address?.state || "";
+        const country = geo.address?.country || "";
+
+        // 2) Weather — Open-Meteo (free, no key)
+        const wRes = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current_weather=true&hourly=relativehumidity_2m&timezone=auto`,
+        );
+        const w = await wRes.json();
+        const temp = w.current_weather?.temperature ?? "—";
+        const wind = w.current_weather?.windspeed ?? "—";
+        const hourIdx = new Date().getHours();
+        const humidity = w.hourly?.relativehumidity_2m?.[hourIdx] ?? "—";
+
+        // populate cards
+        document.getElementById("wCity").textContent = city;
+        document.getElementById("wRegion").textContent = `${state}, ${country}`;
+        document.getElementById("wTemp").textContent = temp + " °C";
+        document.getElementById("wHumidity").textContent = humidity + " %";
+        document.getElementById("wWind").innerHTML =
+          wind + ' <span class="unit">km/h</span>';
+
+        // show weather row
+        document.getElementById("weatherCards").classList.add("visible");
+
+        // badge in form
+        document.getElementById("badgeCity").textContent = city;
+        document.getElementById("autoBadge").classList.add("show");
+
+        detected = true;
+        setDetectLoading(false);
+      } catch (e) {
+        // showError("Failed to fetch weather data. Please try again.");
+        setDetectLoading(false);
+      }
+    },
+    function (err) {
+      showError("Location access denied. Please enable location permissions.");
+      setDetectLoading(false);
+    },
+  );
+}
+
 document
   .getElementById("energyForm")
   .addEventListener("submit", async function (e) {

@@ -99,7 +99,64 @@
       <section class="formSection" id="formSection">
         <div class="container">
    
+ <div class="formHeader" id="header">
+    <div class="header-top">
+      <div>
+        <div class="greeting" id="greeting">Good Morning ☀️</div>
+        <div class="time-row">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span id="clock">--:-- --</span> · <span id="dateStr">--</span>
+        </div>
+      </div>
+      <button class="detect-btn" id="detectBtn" onclick="detectLocation()">
+        <svg id="detectIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+          <line x1="12" y1="1" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="23"/>
+          <line x1="1" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="23" y2="12"/>
+        </svg>
+        <span id="detectText">Detect Location</span>
+      </button>
+    </div>
 
+    <div class="error-strip" id="errorStrip">⚠️ <span id="errorMsg"></span></div>
+
+    <!-- Weather Cards (hidden until detected) -->
+    <div class="weather-cards" id="weatherCards">
+      <!-- Location -->
+      <div class="w-card">
+        <div class="w-card-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Location
+        </div>
+        <div class="w-card-value" id="wCity">—</div>
+        <div class="w-card-sub" id="wRegion">—</div>
+      </div>
+      <!-- Temperature -->
+      <div class="w-card">
+        <div class="w-card-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+          Temperature
+        </div>
+        <div class="w-card-value" id="wTemp">—</div>
+        <div class="w-card-sub">Current outside temp</div>
+      </div>
+      <!-- Humidity -->
+      <div class="w-card">
+        <div class="w-card-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+          Humidity
+        </div>
+        <div class="w-card-value" id="wHumidity">—</div>
+        <div class="w-card-sub">Relative humidity</div>
+      </div>
+      <!-- Wind -->
+      <div class="w-card">
+        <div class="w-card-label">💨 Wind Speed</div>
+        <div class="w-card-value" id="wWind">— <span class="unit">km/h</span></div>
+        <div class="w-card-sub">Current wind</div>
+      </div>
+    </div>
+  </div>
         <div class="main-content">
             <!-- Form Section (LHS) -->
             <div class="form-section">
