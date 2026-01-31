@@ -13,6 +13,13 @@ body {
   padding: 20px;
 } */
 /* Header */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 .formSection {
   padding: 20px;
@@ -27,22 +34,22 @@ body {
   box-shadow: 0 4px 28px rgba(0, 0, 0, 0.07);
   transition: background 0.6s ease;
 }
-.header.night {
+.formHeader.night {
   background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
 }
-.header.afternoon {
+.formHeader.afternoon {
   background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 45%, #e0e7ff 100%);
 }
 
 /* decorative blobs */
-.header::before,
-.header::after {
+.formHeader::before,
+.formHeader::after {
   content: "";
   position: absolute;
   border-radius: 50%;
   pointer-events: none;
 }
-.header::before {
+.formHeader::before {
   width: 160px;
   height: 160px;
   top: -50px;
@@ -50,14 +57,14 @@ body {
   background: rgba(251, 191, 36, 0.22);
   transition: background 0.6s;
 }
-.header.night::before {
+.formHeader.night::before {
   background: rgba(99, 102, 241, 0.18);
 }
-.header.afternoon::before {
+.formHeader.afternoon::before {
   background: rgba(251, 191, 36, 0.15);
 }
 
-.header::after {
+.formHeader::after {
   width: 110px;
   height: 110px;
   bottom: -35px;
@@ -65,10 +72,9 @@ body {
   background: rgba(59, 130, 246, 0.12);
   transition: background 0.6s;
 }
-.header.night::after {
+.formHeader.night::after {
   background: rgba(139, 92, 246, 0.12);
 }
-
 /* top bar: greeting + button */
 .header-top {
   display: flex;
@@ -88,7 +94,7 @@ body {
   letter-spacing: -0.5px;
   transition: color 0.4s;
 }
-.header.night .greeting {
+.formHeader.night .greeting {
   color: #f5f3ff;
 }
 
@@ -101,7 +107,7 @@ body {
   gap: 6px;
   transition: color 0.4s;
 }
-.header.night .time-row {
+.formHeader.night .time-row {
   color: #a5b4fc;
 }
 .time-row svg {
@@ -208,7 +214,7 @@ body {
     background 0.4s,
     border-color 0.4s;
 }
-.header.night .w-card {
+.formHeader.night .w-card {
   background: rgba(30, 27, 75, 0.55);
   border-color: rgba(165, 180, 252, 0.2);
 }
@@ -224,7 +230,7 @@ body {
   color: var(--text-2);
   transition: color 0.4s;
 }
-.header.night .w-card-label {
+.formHeader.night .w-card-label {
   color: #a5b4fc;
 }
 .w-card-label svg {
@@ -240,7 +246,7 @@ body {
   color: var(--text-1);
   transition: color 0.4s;
 }
-.header.night .w-card-value {
+.formHeader.night .w-card-value {
   color: #f5f3ff;
 }
 .w-card-value .unit {
@@ -254,7 +260,7 @@ body {
   color: var(--text-3);
   transition: color 0.4s;
 }
-.header.night .w-card-sub {
+.formHeader.night .w-card-sub {
   color: #7c7aad;
 }
 
@@ -451,4 +457,214 @@ select:focus {
   font-size: 0.85rem;
   color: #7f8c8d;
   margin-top: 5px;
+}
+
+/* ── Responsive ── */
+
+/* Tablets (portrait) and smaller laptops */
+@media (max-width: 780px) {
+  .body-grid {
+    grid-template-columns: 1fr;
+  }
+  .weather-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Header adjustments */
+  .formHeader {
+    padding: 20px 22px;
+  }
+  .greeting {
+    font-size: 20px;
+  }
+  .time-row {
+    font-size: 12px;
+  }
+  .detect-btn {
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+  .w-card {
+    padding: 14px 16px;
+  }
+  .w-card-value {
+    font-size: 19px;
+  }
+}
+
+/* Mobile landscape and smaller tablets */
+@media (max-width: 640px) {
+  body {
+    padding: 20px 12px;
+  }
+
+  /* Header responsive */
+  .formHeader {
+    padding: 18px 18px;
+    border-radius: 16px;
+  }
+
+  .header-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .greeting {
+    font-size: 19px;
+  }
+
+  .detect-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Weather cards stack better */
+  .weather-cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .w-card {
+    padding: 12px 14px;
+  }
+
+  .w-card-label {
+    font-size: 9.5px;
+  }
+
+  .w-card-value {
+    font-size: 17px;
+    margin-top: 6px;
+  }
+
+  .w-card-sub {
+    font-size: 10.5px;
+  }
+
+  /* Form panel */
+  .form-panel {
+    padding: 26px 22px;
+  }
+
+  .form-title {
+    font-size: 20px;
+  }
+}
+
+/* Small mobile devices */
+@media (max-width: 420px) {
+  .weather-cards {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Header compact */
+  .formHeader {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .greeting {
+    font-size: 17px;
+  }
+
+  .time-row {
+    font-size: 11px;
+    flex-wrap: wrap;
+  }
+
+  .detect-btn {
+    font-size: 11.5px;
+    padding: 9px 14px;
+  }
+
+  .w-card {
+    padding: 14px 16px;
+  }
+
+  .w-card-label {
+    font-size: 9px;
+    gap: 4px;
+  }
+
+  .w-card-label svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .w-card-value {
+    font-size: 18px;
+  }
+
+  /* Decorative blobs smaller */
+  .formHeader::before {
+    width: 100px;
+    height: 100px;
+    top: -30px;
+    right: -30px;
+  }
+
+  .formHeader::after {
+    width: 70px;
+    height: 70px;
+    bottom: -20px;
+    left: -20px;
+  }
+
+  /* Form adjustments */
+  .form-panel {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+
+  .form-title {
+    font-size: 18px;
+  }
+
+  .field input,
+  .field select {
+    padding: 11px 14px;
+    font-size: 13px;
+  }
+
+  .calc-btn {
+    padding: 13px;
+    font-size: 14px;
+  }
+
+  .res-card {
+    padding: 20px 18px;
+  }
+
+  .res-value {
+    font-size: 21px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 360px) {
+  .greeting {
+    font-size: 16px;
+  }
+
+  .formHeader {
+    padding: 14px;
+  }
+
+  .weather-cards {
+    margin-top: 16px;
+  }
+
+  .w-card-value {
+    font-size: 16px;
+  }
+
+  .form-title {
+    font-size: 17px;
+  }
 }
